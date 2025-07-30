@@ -57,7 +57,13 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/orders/{order}/prepare', [OutletController::class, 'startPreparation'])->name('orders.prepare');
         Route::patch('/orders/{order}/complete', [OutletController::class, 'completeOrder'])->name('completeOrder');
         Route::get('/transactions', [OutletController::class, 'transactions'])->name('transactions');
+    Route::get('/transactions/export', [OutletController::class, 'exportTransactions'])->name('transactions.export');
         Route::resource('products', OutletProductController::class);
+        Route::get('/recap/purchases', [OutletController::class, 'purchaseRecap'])->name('recap.purchases');
+    Route::get('/recap/products', [OutletController::class, 'productRecap'])->name('recap.products');
+     Route::get('/recap/purchases/export', [OutletController::class, 'exportPurchaseRecap'])->name('recap.purchases.export');
+    Route::get('/recap/products/export', [OutletController::class, 'exportProductRecap'])->name('recap.products.export');
+
     });
 
     // Rute untuk DIVISI

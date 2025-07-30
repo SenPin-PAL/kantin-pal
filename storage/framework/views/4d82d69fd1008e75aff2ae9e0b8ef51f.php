@@ -1,69 +1,68 @@
-@extends('layouts.app')
+<?php $__env->startSection('title', 'Buat Pesanan Baru'); ?>
 
-@section('title', 'Buat Pesanan Baru')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="card">
     <div class="card-header">
         <h1>Buat Pesanan Baru</h1>
         <div class="search-bar">
-            <form action="{{ route('divisi.createOrder') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control" placeholder="Cari nama atau deskripsi menu..." value="{{ request('search') }}">
+            <form action="<?php echo e(route('divisi.createOrder')); ?>" method="GET" class="d-flex">
+                <input type="text" name="search" class="form-control" placeholder="Cari nama atau deskripsi menu..." value="<?php echo e(request('search')); ?>">
                 <button type="submit" class="btn btn-primary ml-2">Cari</button>
             </form>
         </div>
     </div>
-    <form action="{{ route('divisi.storeOrder') }}" method="POST">
-        @csrf
+    <form action="<?php echo e(route('divisi.storeOrder')); ?>" method="POST">
+        <?php echo csrf_field(); ?>
         <div class="card-body">
             <div class="product-grid">
-                @forelse($products as $product)
+                <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div class="product-card">
                         <div class="product-card-image">
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                            <img src="<?php echo e(asset('storage/' . $product->image)); ?>" alt="<?php echo e($product->name); ?>">
                         </div>
                         <div class="product-card-body">
-                            <h3>{{ $product->name }}</h3>
-                            <p class="outlet-name">{{ $product->outlet->name }}</p>
-                            <p class="stock-info">Stok: {{ $product->stock }}</p>
+                            <h3><?php echo e($product->name); ?></h3>
+                            <p class="outlet-name"><?php echo e($product->outlet->name); ?></p>
+                            <p class="stock-info">Stok: <?php echo e($product->stock); ?></p>
                         </div>
                         <div class="product-card-footer">
-                            <input type="hidden" name="products[{{ $loop->index }}][id]" value="{{ $product->id }}">
+                            <input type="hidden" name="products[<?php echo e($loop->index); ?>][id]" value="<?php echo e($product->id); ?>">
                             <div class="quantity-selector">
                                 <button type="button" class="quantity-btn" data-action="decrement">-</button>
-                                <input type="number" name="products[{{ $loop->index }}][quantity]" class="quantity-input" value="0" min="0" max="{{ $product->stock }}">
+                                <input type="number" name="products[<?php echo e($loop->index); ?>][quantity]" class="quantity-input" value="0" min="0" max="<?php echo e($product->stock); ?>">
                                 <button type="button" class="quantity-btn" data-action="increment">+</button>
                             </div>
                         </div>
                     </div>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <p class="text-center" style="grid-column: 1 / -1; padding: 2rem;">
-                        @if(request('search'))
-                            Menu dengan kata kunci "{{ request('search') }}" tidak ditemukan.
-                        @else
+                        <?php if(request('search')): ?>
+                            Menu dengan kata kunci "<?php echo e(request('search')); ?>" tidak ditemukan.
+                        <?php else: ?>
                             Saat ini tidak ada produk yang tersedia di semua outlet.
-                        @endif
+                        <?php endif; ?>
                     </p>
-                @endforelse
+                <?php endif; ?>
             </div>
 
-            {{-- Menambahkan Link Paginasi --}}
+            
             <<div class="pagination-wrapper mt-4">
-    {{ $products->links() }}
+    <?php echo e($products->links()); ?>
+
 </div>
 
         </div>
         
-        @if($products->isNotEmpty())
+        <?php if($products->isNotEmpty()): ?>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Kirim Pesanan</button>
         </div>
-        @endif
+        <?php endif; ?>
     </form>
 </div>
 
-@push('scripts')
-{{-- Script untuk tombol +/- tetap sama --}}
+<?php $__env->startPush('scripts'); ?>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const quantitySelectors = document.querySelectorAll('.quantity-selector');
@@ -87,5 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Office\KP\PROJEK\kantin-pal\resources\views/divisi/order/create.blade.php ENDPATH**/ ?>
