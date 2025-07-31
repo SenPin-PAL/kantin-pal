@@ -17,10 +17,10 @@
     <div id="app">
         <header class="navbar">
             <div class="container">
-                <a href="/" class="navbar-brand">POS App</a>
+                <a href="/" class="navbar-brand">Kantin PAL</a>
                 <nav>
                     <?php if(auth()->guard()->check()): ?>
-                        <span class="navbar-user">Halo, <?php echo e(Auth::user()->name); ?> (<?php echo e(ucfirst(Auth::user()->role)); ?>)</span>
+                        <span class="navbar-user">Halo, <?php echo e(Auth::user()->name); ?> <!--(<?php echo e(ucfirst(Auth::user()->role)); ?>)--> </span>
                         
                         
                         <a href="<?php echo e(route('profile.edit')); ?>" class="btn btn-sm btn-secondary" style="margin-right: 0.5rem;">Profil</a>

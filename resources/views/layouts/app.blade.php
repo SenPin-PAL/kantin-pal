@@ -9,8 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
     
     {{-- Memanggil satu file CSS dari folder public --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -19,28 +17,21 @@
     <div id="app">
         <header class="navbar">
             <div class="container">
-                <a href="/" class="navbar-brand">POS App</a>
+                <a href="/" class="navbar-brand">Kantin PAL</a>
                 <nav>
                     @auth
-                        <span class="navbar-user">Halo, {{ Auth::user()->name }} ({{ ucfirst(Auth::user()->role) }})</span>
-                       
-                        {{-- Tombol Profil --}}
-                        <a href="{{ route('profile.edit') }}" class="icon-nav" style="margin-right: 0.5rem;">
-                            <i class="bi bi-person-fill"></i>
-                        </a>
-
-                        {{-- Tombol Logout --}}
+                        <span class="navbar-user">Halo, {{ Auth::user()->name }} <!--({{ ucfirst(Auth::user()->role)}})--> </span>
+                        
+                        {{-- Tombol Profil ditambahkan di sini --}}
+                        <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-secondary" style="margin-right: 0.5rem;">Profil</a>
+                        
                         <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                             @csrf
-                            <button type="submit" class="icon-logout">
-                                <i class="bi bi-box-arrow-right"></i>
-                            </button>
+                            <button type="submit" class="btn btn-danger">Logout</button>
                         </form>
-
-
                     @endauth
                     @guest
-                        <!-- <a href="{{ route('login') }}" class="btn btn-primary">Login</a> -->
+                        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
                     @endguest
                 </nav>
             </div>

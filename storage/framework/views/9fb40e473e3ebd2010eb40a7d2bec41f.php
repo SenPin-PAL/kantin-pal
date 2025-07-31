@@ -45,6 +45,7 @@
                         </div>
                         <div class="product-card-body">
                             <h5 class="font-weight-bold mb-1"><?php echo e($product->name); ?></h5>
+                            <p class="outlet-name"><?php echo e($product->description); ?></p>
                             <p class="text-muted mb-1"><small><?php echo e($product->outlet->name); ?></small></p>
                             <p class="mb-1">Stok: <span class="font-weight-bold"><?php echo e($product->stock); ?></span></p>
                         </div>
@@ -69,7 +70,7 @@
         
         <div class="order-summary-panel card">
             <div class="card-header">
-                <h4 class="mb-0">Ringkasan Pesanan</h4>
+                <h4 class="mb-0">Ringkasan Pesanan <?php echo e(Auth::user()->name); ?></h4>
             </div>
             <div class="card-body">
                 <div id="cart-items-container">
@@ -80,10 +81,6 @@
                 </div>
             </div>
              <div class="card-footer">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0">Total</h5>
-                    <h5 class="mb-0 font-weight-bold" id="total-price">Rp 0</h5>
-                </div>
                 <button type="submit" class="btn btn-success btn-block btn-lg" id="submit-order-btn" disabled>
                     Kirim Pesanan
                 </button>
