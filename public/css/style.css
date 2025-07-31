@@ -206,11 +206,10 @@ td form {
 .btn-danger { background-color: var(--danger-color); color: var(--white-color); }
 .btn-warning { background-color: var(--warning-color); color: var(--white-color); }
 .btn-secondary { background-color: var(--secondary-color); color: var(--dark-gray); }
-
-.btn-sm {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-}
+.btn-info { background-color: #0ea5e9; color: white; }
+.btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+.btn-block { width: 100%; }
+.btn-lg { padding: 0.8rem 1.5rem; font-size: 1rem; }
 
 /* === ALERTS === */
 .alert {
@@ -235,6 +234,7 @@ td form {
 
 .status-pending { background-color: #FEF3C7; color: #92400E; }
 .status-approved { background-color: #DBEAFE; color: #1E40AF; }
+.status-preparing { background-color: #FEF08A; color: #A16207; }
 .status-completed { background-color: #D1FAE5; color: #065F46; }
 .status-rejected { background-color: #FEE2E2; color: #991B1B; }
 .status-unpaid { background-color: #FEE2E2; color: #991B1B; }
@@ -291,13 +291,25 @@ textarea.form-control {
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
+.product-card-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.product-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .product-card-body {
     padding: 1.25rem;
     flex-grow: 1;
     text-align: center;
 }
 
-.product-card-body h3 {
+.product-card-body h3, .product-card-body h5 {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
@@ -357,6 +369,102 @@ textarea.form-control {
     margin: 0;
 }
 
+
+/*
+==================================================================
+  ORDER PAGE SPECIFIC STYLES (DIGABUNG DARI order-page.css)
+==================================================================
+*/
+
+/* Main container untuk layout 2 kolom di halaman order */
+.order-container {
+    display: flex;
+    flex-wrap: wrap; /* Agar responsif di layar kecil */
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* Panel kiri untuk daftar produk */
+.product-list-panel {
+    flex: 3;
+    min-width: 300px;
+}
+
+.product-list-scroller {
+    max-height: 75vh;
+    overflow-y: auto;
+    padding-right: 1rem;
+    margin-right: -1rem;
+}
+
+.product-list-scroller::-webkit-scrollbar {
+    width: 8px;
+}
+.product-list-scroller::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+/* Panel kanan untuk ringkasan pesanan (sticky) */
+.order-summary-panel {
+    flex: 2;
+    min-width: 300px;
+    position: sticky;
+    top: 80px; /* Sesuaikan dengan tinggi navbar Anda */
+    background-color: var(--white-color);
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+/* Style spesifik untuk item di keranjang */
+#cart-items-list {
+    list-style: none;
+    padding: 0;
+    max-height: 35vh;
+    overflow-y: auto;
+}
+#cart-items-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+#cart-items-list li:last-child {
+    border-bottom: none;
+}
+.item-details small {
+    color: #6c757d;
+}
+
+/* Tombol +/- dan input kuantitas di dalam keranjang */
+.quantity-selector-cart {
+  display: flex;
+  align-items: center;
+}
+.quantity-input-cart {
+  width: 50px;
+  text-align: center;
+  border: 1px solid var(--medium-gray);
+  border-radius: 4px;
+  margin: 0 5px;
+  font-size: 0.9rem;
+}
+.quantity-selector-cart .btn {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    background-color: var(--secondary-color);
+    color: var(--dark-gray);
+}
+
+/*
+==================================================================
+  END OF ORDER PAGE SPECIFIC STYLES
+==================================================================
+*/
+
+
 /* === UTILITIES & OTHER === */
 .footer {
     text-align: center;
@@ -380,7 +488,7 @@ textarea.form-control {
 .d-flex { display: flex; }
 .d-inline { display: inline-block; }
 .ml-2 { margin-left: 0.5rem; }
-.m-4 { margin: 1.5rem; } /* Ditambahkan untuk alert di halaman profil */
+.m-4 { margin: 1.5rem; }
 .text-center { text-align: center; }
 .text-muted { color: #6c757d; }
 .text-success { color: #059669; }
@@ -409,232 +517,13 @@ hr.my-4 { border: 0; border-top: 1px solid var(--light-gray); }
     border-bottom: none;
 }
 
-.recap-item {
-    border: 1px solid var(--medium-gray);
-    border-radius: var(--border-radius);
-    margin-bottom: 1rem;
-    overflow: hidden;
-}
-
-.recap-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    background-color: #F9FAFB;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.recap-header:hover {
-    background-color: #F3F4F6;
-}
-
-.recap-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.recap-info strong {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.recap-meta {
-    font-size: 0.85rem;
-    color: #6B7280;
-}
-
-.recap-summary {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    text-align: right;
-}
-
-.recap-date {
-    font-size: 0.9rem;
-    color: #6B7280;
-}
-
-.recap-arrow {
-    font-size: 1rem;
-    transition: transform 0.3s ease;
-}
-
-.recap-details {
-    display: none;
-    padding: 1.5rem;
-    border-top: 1px solid var(--medium-gray);
-}
-
-/* === PROFILE PAGE STYLING === */
-.profile-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 1.5rem;
-}
-
-/* === TAMBAHAN UNTUK GAMBAR PRODUK === */
-.product-card-image {
-    width: 100%;
-    height: 150px; /* Atur tinggi gambar agar seragam */
-    overflow: hidden;
-}
-
-.product-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Membuat gambar mengisi kotak tanpa distorsi */
-}
-
-/* ... di dalam bagian === STATUS BADGES === ... */
-
-.status-preparing { background-color: #FEF08A; color: #A16207; } /* Yellow */
-/* .status-ready { background-color: #BFDBFE; color: #1E40AF; } Blue */
-
-/* === TAMBAHAN UNTUK FILTER & REKAP BERTINGKAT === */
-.filter-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    background-color: var(--light-gray);
-    border-radius: var(--border-radius);
-}
-.filter-bar .form-group {
-    margin-bottom: 0;
-}
-.sr-only { /* Hide label visually but keep for screen readers */
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-.date-header {
-    background-color: var(--dark-gray);
-    color: var(--white-color);
-}
-.date-header:hover {
-    background-color: #4B5563; /* gray-700 */
-}
-.nested-item {
-    margin: 1rem;
-    border-color: #E5E7EB; /* gray-200 */
-}
-/* === TAMBAHAN UNTUK FILTER & REKAP BERTINGKAT === */
-.filter-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    background-color: var(--light-gray);
-    border-radius: var(--border-radius);
-}
-.filter-bar .form-group {
-    margin-bottom: 0;
-}
-.sr-only { /* Hide label visually but keep for screen readers */
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-.date-header {
-    background-color: var(--dark-gray);
-    color: var(--white-color);
-}
-.date-header:hover {
-    background-color: #4B5563; /* gray-700 */
-}
-.nested-item {
-    margin: 1rem;
-    border-color: #E5E7EB; /* gray-200 */
-}
-/* === SEARCH BAR STYLING === */
-.search-bar {
-    min-width: 300px;
-}
-.btn-group {
-    display: flex;
-    gap: 0.5rem;
-}
-.btn-info {
-    background-color: #0ea5e9; /* sky-500 */
-    color: white;
-}
-/* === HUB NAVIGATION STYLING === */
-
-.hub-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    padding: 3rem 1rem;
-    flex-wrap: wrap; /* Agar responsif di layar kecil */
-}
-
-.hub-button {
-    display: block;
-    width: 300px;
-    padding: 2rem;
-    border: 1px solid var(--medium-gray);
-    border-radius: var(--border-radius);
-    text-align: center;
-    text-decoration: none;
-    color: var(--text-color);
-    transition: all 0.2s ease-in-out;
-}
-
-.hub-button:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--box-shadow);
-    border-color: var(--primary-color);
-}
-
-.hub-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.hub-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.hub-description {
-    font-size: 0.9rem;
-    color: #6B7880;
-    line-height: 1.5;
-}
-
-.btn-group {
-    display: flex;
-    gap: 0.5rem;
-}
-.btn-info {
-    background-color: #0ea5e9; /* sky-500 */
-    color: white;
-}
-
 /* === PAGINATION STYLING - COMPACT VERSION === */
 .pagination-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 1rem;
-    margin-top: 1.5rem; /* Mengurangi margin top agar lebih kompak */
+    margin-top: 1.5rem;
 }
 
 .pagination {
@@ -656,10 +545,10 @@ hr.my-4 { border: 0; border-top: 1px solid var(--light-gray); }
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    min-width: 28px; /* Memperkecil ukuran tombol */
-    height: 28px; /* Memperkecil ukuran tombol */
-    padding: 0.2rem 0.4rem; /* Mengurangi padding */
-    font-size: 0.75rem; /* Ukuran font lebih kecil */
+    min-width: 28px;
+    height: 28px;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-align: center;
     color: var(--primary-color);
@@ -691,9 +580,8 @@ hr.my-4 { border: 0; border-top: 1px solid var(--light-gray); }
     cursor: not-allowed;
 }
 
-/* Menyesuaikan ukuran panah */
 .pagination li a svg,
 .pagination li span svg {
-    width: 12px !important;  /* Ukuran panah lebih kecil */
-    height: 12px !important; /* Ukuran panah lebih kecil */
+    width: 12px !important;
+    height: 12px !important;
 }
