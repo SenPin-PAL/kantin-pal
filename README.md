@@ -107,7 +107,7 @@ Anda dapat login menggunakan akun default yang dibuat oleh seeder:
 - Password: `password`
 
 **Outlet:**
-- Username: `outlet_pusat`
+- Username: `outletA`
 - Password: `password`
 
 **Divisi:**
