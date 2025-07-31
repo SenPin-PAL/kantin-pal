@@ -24,6 +24,7 @@
                         </div>
                         <div class="product-card-body">
                             <h3>{{ $product->name }}</h3>
+                            <p class="outlet-name">{{ $product->description }}</p>
                             <p class="outlet-name">{{ $product->outlet->name }}</p>
                             <p class="stock-info">Stok: {{ $product->stock }}</p>
                         </div>
