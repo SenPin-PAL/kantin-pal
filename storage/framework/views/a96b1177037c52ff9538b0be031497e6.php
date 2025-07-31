@@ -31,7 +31,7 @@
                         </form>
                     <?php endif; ?>
                     <?php if(auth()->guard()->guest()): ?>
-                        <a href="<?php echo e(route('login')); ?>" class="btn btn-primary">Login</a>
+                       
                     <?php endif; ?>
                 </nav>
             </div>
