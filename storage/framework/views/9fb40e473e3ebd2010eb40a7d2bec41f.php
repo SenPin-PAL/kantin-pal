@@ -1,15 +1,17 @@
 <?php $__env->startSection('title', 'Buat Pesanan Baru'); ?>
+
 <?php $__env->startSection('content'); ?>
+
+
 <div class="card mb-4">
     <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items: center">
             <h1 class="h3 mb-0">Buat Pesanan Baru</h1>
             <div class="w-50">
-                <input type="text" id="searchInput" class="form-control" placeholder="Cari nama menu...">
+                <input type="text" id="searchInput" class="form-control" placeholder="Cari nama menu atau outlet...">
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </div>
 
 
@@ -35,80 +37,53 @@
         
         
         <div class="product-list-panel">
-            <div class="product-list-scroller">
-                <div class="product-grid">
-                    <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                        <div class="product-card" data-name="<?php echo e(strtolower($product->name)); ?>" data-outlet="<?php echo e(strtolower($product->outlet->name)); ?>">
-                            <div class="product-card-image">
-                                <img src="<?php echo e($product->image ? asset('storage/' . $product->image) : 'https://placehold.co/400x300/e9ecef/495057?text=No+Image'); ?>" alt="<?php echo e($product->name); ?>">
-                            </div>
-                            <div class="product-card-body">
-                                <h5 class="font-weight-bold mb-1"><?php echo e($product->name); ?></h5>
-                                <p class="text-muted mb-1"><small><?php echo e($product->outlet->name); ?></small></p>
-                                <p class="mb-1">Stok: <span class="font-weight-bold"><?php echo e($product->stock); ?></span></p>
-                                <p class="font-weight-bold h5 text-primary">Rp <?php echo e(number_format($product->price, 0, ',', '.')); ?></p>
-                            </div>
-                            <div class="product-card-footer">
-                                <button type="button" class="btn btn-primary btn-block add-to-cart-btn"
-                                    data-id="<?php echo e($product->id); ?>"
-                                    data-name="<?php echo e($product->name); ?>"
-                                    data-price="<?php echo e($product->price); ?>"
-                                    data-stock="<?php echo e($product->stock); ?>">
-                                    + Tambah ke Keranjang
-                                </button>
-=======
-    <form action="<?php echo e(route('divisi.storeOrder')); ?>" method="POST">
-        <?php echo csrf_field(); ?>
-        <div class="card-body">
             <div class="product-grid">
-                <?php $__empty_2 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
-                    <div class="product-card">
+                <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <div class="product-card" data-name="<?php echo e(strtolower($product->name)); ?>" data-outlet="<?php echo e(strtolower($product->outlet->name)); ?>">
                         <div class="product-card-image">
-                            <img src="<?php echo e(asset('storage/' . $product->image)); ?>" alt="<?php echo e($product->name); ?>">
+                            <img src="<?php echo e($product->image ? asset('storage/' . $product->image) : 'https://placehold.co/400x300/e9ecef/495057?text=No+Image'); ?>" alt="<?php echo e($product->name); ?>">
                         </div>
                         <div class="product-card-body">
-                            <h3><?php echo e($product->name); ?></h3>
-                            <p class="outlet-name"><?php echo e($product->description); ?></p>
-                            <p class="outlet-name"><?php echo e($product->outlet->name); ?></p>
-                            <p class="stock-info">Stok: <?php echo e($product->stock); ?></p>
+                            <h5 class="font-weight-bold mb-1"><?php echo e($product->name); ?></h5>
+                            <p class="text-muted mb-1"><small><?php echo e($product->outlet->name); ?></small></p>
+                            <p class="mb-1">Stok: <span class="font-weight-bold"><?php echo e($product->stock); ?></span></p>
                         </div>
                         <div class="product-card-footer">
-                            <input type="hidden" name="products[<?php echo e($loop->index); ?>][id]" value="<?php echo e($product->id); ?>">
-                            <div class="quantity-selector">
-                                <button type="button" class="quantity-btn" data-action="decrement">-</button>
-                                <input type="number" name="products[<?php echo e($loop->index); ?>][quantity]" class="quantity-input" value="0" min="0" max="<?php echo e($product->stock); ?>">
-                                <button type="button" class="quantity-btn" data-action="increment">+</button>
->>>>>>> origin/mansen
-                            </div>
+                            <button type="button" class="btn btn-primary btn-block add-to-cart-btn"
+                                data-id="<?php echo e($product->id); ?>"
+                                data-name="<?php echo e($product->name); ?>"
+                                data-price="<?php echo e($product->price); ?>"
+                                data-stock="<?php echo e($product->stock); ?>">
+                                + Tambah
+                            </button>
                         </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_2): ?>
-                        <p class="text-center" style="grid-column: 1 / -1; padding: 2rem;">
-                            Saat ini tidak ada produk yang tersedia.
-                        </p>
-                    <?php endif; ?>
-                </div>
+                    </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                    <p class="text-center" style="grid-column: 1 / -1; padding: 2rem;">
+                        Saat ini tidak ada produk yang tersedia.
+                    </p>
+                <?php endif; ?>
             </div>
         </div>
 
         
-        <div class="order-summary-panel">
-            <div class="card-header bg-light">
+        <div class="order-summary-panel card">
+            <div class="card-header">
                 <h4 class="mb-0">Ringkasan Pesanan</h4>
             </div>
-            <div class="card-body p-4">
-                <div id="cart-items-container" style="min-height: 150px;">
+            <div class="card-body">
+                <div id="cart-items-container">
                     <ul id="cart-items-list">
                         
                     </ul>
                     <p id="empty-cart-message" class="text-center text-muted mt-4 pt-4">Keranjang masih kosong.</p>
                 </div>
-                <hr>
-                <div class="d-flex justify-content-between align-items-center">
+            </div>
+             <div class="card-footer">
+                <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="mb-0">Total</h5>
                     <h5 class="mb-0 font-weight-bold" id="total-price">Rp 0</h5>
                 </div>
-            </div>
-             <div class="card-footer p-3">
                 <button type="submit" class="btn btn-success btn-block btn-lg" id="submit-order-btn" disabled>
                     Kirim Pesanan
                 </button>
@@ -124,9 +99,8 @@
 <?php $__env->startPush('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const cart = {}; // { productId: { name, price, quantity, stock } }
-    
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    let cart = {};
+
     const cartItemsList = document.getElementById('cart-items-list');
     const emptyCartMessage = document.getElementById('empty-cart-message');
     const totalPriceEl = document.getElementById('total-price');
@@ -136,16 +110,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- FUNGSI UTAMA ---
     function addToCart(id, name, price, stock) {
+        stock = parseInt(stock);
         if (cart[id]) {
             if (cart[id].quantity < stock) {
                 cart[id].quantity++;
             } else {
-                // Bisa diganti dengan notifikasi yang lebih baik
                 alert(`Stok untuk ${name} tidak mencukupi.`);
             }
         } else {
             if (stock > 0) {
-                cart[id] = { name, price: parseFloat(price), quantity: 1, stock: parseInt(stock) };
+                cart[id] = { name, quantity: 1, stock: stock };
             } else {
                 alert(`Stok untuk ${name} habis.`);
             }
@@ -155,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateQuantity(id, newQuantity) {
         newQuantity = parseInt(newQuantity, 10);
-        if (!cart[id]) return; // Jika item sudah tidak ada
+        if (!cart[id]) return;
 
         if (newQuantity > 0) {
              if (newQuantity <= cart[id].stock) {
@@ -184,22 +158,20 @@ document.addEventListener('DOMContentLoaded', function () {
             const item = cart[id];
             totalPrice += item.quantity * item.price;
 
-            // Buat elemen list untuk ditampilkan di keranjang
             const li = document.createElement('li');
+            // PERUBAHAN: Menghapus harga per item dari tampilan keranjang
             li.innerHTML = `
                 <div class="item-details">
                     <strong class="d-block">${item.name}</strong>
-                    <small>Rp ${item.price.toLocaleString('id-ID')}</small>
                 </div>
                 <div class="quantity-selector-cart">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" data-id="${id}" data-action="decrement">-</button>
+                    <button type="button" class="btn" data-id="${id}" data-action="decrement">-</button>
                     <input type="number" class="quantity-input-cart" value="${item.quantity}" min="1" max="${item.stock}" data-id="${id}">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" data-id="${id}" data-action="increment">+</button>
+                    <button type="button" class="btn" data-id="${id}" data-action="increment">+</button>
                 </div>
             `;
             cartItemsList.appendChild(li);
 
-            // Buat hidden input untuk dikirim bersama form
             const hiddenId = document.createElement('input');
             hiddenId.type = 'hidden';
             hiddenId.name = `products[${index}][id]`;
@@ -220,15 +192,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- EVENT LISTENERS ---
     document.querySelector('.product-grid').addEventListener('click', (e) => {
-        if (e.target.classList.contains('add-to-cart-btn')) {
-            const { id, name, price, stock } = e.target.dataset;
+        const button = e.target.closest('.add-to-cart-btn');
+        if (button) {
+            const { id, name, price, stock } = button.dataset;
             addToCart(id, name, price, stock);
         }
     });
 
     cartItemsList.addEventListener('click', (e) => {
-        const target = e.target;
-        if (target.tagName === 'BUTTON') {
+        const target = e.target.closest('button');
+        if (target) {
             const id = target.dataset.id;
             const action = target.dataset.action;
             if (action === 'increment') {
@@ -246,7 +219,8 @@ document.addEventListener('DOMContentLoaded', function () {
             updateQuantity(id, newQuantity);
         }
     });
-    
+
+    // Event listener untuk pencarian real-time
     searchInput.addEventListener('keyup', function() {
         const searchTerm = this.value.toLowerCase();
         const productCards = document.querySelectorAll('.product-card');
@@ -261,8 +235,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    // --- INISIALISASI ---
+    updateCartDisplay();
 });
 </script>
-
+<?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\Sekolah\Semester_6\Magang\Coding\kantin-pal\resources\views/divisi/order/create.blade.php ENDPATH**/ ?>
