@@ -44,7 +44,7 @@
                 <button type="submit" class="btn btn-primary">Simpan Pembayaran</button>
             </form>
             @else
-            <div class="alert alert-success">Pesanan ini sudah lunas.</div>
+            <div class="alert alert-success">Pesanan sudah lunas.</div>
             @endif
         </div>
     </div>

@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h1>Riwayat Pesanan Saya</h1>
+        <h1>Riwayat Pesanan</h1>
         <a href="{{ route('divisi.createOrder') }}" class="btn btn-primary">Buat Pesanan Baru</a>
     </div>
     <div class="card-body">
@@ -51,7 +51,7 @@
         <td>{{ $order->created_at->format('d M Y') }}</td>
     </tr>
     @empty
-    <tr><td colspan="5" class="text-center" style="padding: 2rem;">Anda belum pernah membuat pesanan.</td></tr>
+    <tr><td colspan="5" class="text-center" style="padding: 2rem;">Belum pernah membuat pesanan.</td></tr>
     @endforelse
 </tbody>
             </table>
