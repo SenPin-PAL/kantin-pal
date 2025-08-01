@@ -14,17 +14,29 @@ class DivisiController extends Controller
     /**
      * Menampilkan halaman untuk membuat pesanan dari SEMUA outlet.
      */
+    // public function createOrder()
+    // {
+    //     // Ambil semua produk yang stoknya ada, dan eager load relasi outlet-nya
+    //     // untuk ditampilkan di view. Urutkan berdasarkan nama outlet.
+    //     $products = Product::where('stock', '>', 0)
+    //         ->with('outlet')
+    //         ->get()
+    //         ->sortBy('outlet.name');
+        
+    //     return view('divisi.order.create', compact('products'));
+    // }
+
     public function createOrder()
     {
-        // Ambil semua produk yang stoknya ada, dan eager load relasi outlet-nya
-        // untuk ditampilkan di view. Urutkan berdasarkan nama outlet.
         $products = Product::where('stock', '>', 0)
             ->with('outlet')
-            ->get()
-            ->sortBy('outlet.name');
-        
+            ->orderBy('outlet_id')
+            ->paginate(8);
+    
         return view('divisi.order.create', compact('products'));
     }
+    
+
 
     /**
      * Menyimpan pesanan baru ke database.
