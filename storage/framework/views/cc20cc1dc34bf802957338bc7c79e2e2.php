@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title><?php echo $__env->yieldContent('title', 'Aplikasi POS'); ?> - FOOD COURT PAL</title>
+=======
+    <title><?php echo $__env->yieldContent('title', 'Aplikasi POS'); ?> - POS App</title>
+>>>>>>> 98fd97ca091f788734b3650837421689d8bc2a5b
     
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
+=======
+>>>>>>> 98fd97ca091f788734b3650837421689d8bc2a5b
     
     
     <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
@@ -19,6 +26,7 @@
     <div id="app">
         <header class="navbar">
             <div class="container">
+<<<<<<< HEAD
                 <a href="/" class="navbar-brand">FOOD COURT PAL</a>
                 <nav>
                     <?php if(auth()->guard()->check()): ?>
@@ -41,6 +49,23 @@
                     <?php endif; ?>
                     <?php if(auth()->guard()->guest()): ?>
                         <!-- <a href="<?php echo e(route('login')); ?>" class="btn btn-primary">Login</a> -->
+=======
+                <a href="/" class="navbar-brand">POS App</a>
+                <nav>
+                    <?php if(auth()->guard()->check()): ?>
+                        <span class="navbar-user">Halo, <?php echo e(Auth::user()->name); ?> (<?php echo e(ucfirst(Auth::user()->role)); ?>)</span>
+                        
+                        
+                        <a href="<?php echo e(route('profile.edit')); ?>" class="btn btn-sm btn-secondary" style="margin-right: 0.5rem;">Profil</a>
+                        
+                        <form action="<?php echo e(route('logout')); ?>" method="POST" style="display:inline;">
+                            <?php echo csrf_field(); ?>
+                            <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
+                    <?php endif; ?>
+                    <?php if(auth()->guard()->guest()): ?>
+                        <a href="<?php echo e(route('login')); ?>" class="btn btn-primary">Login</a>
+>>>>>>> 98fd97ca091f788734b3650837421689d8bc2a5b
                     <?php endif; ?>
                 </nav>
             </div>

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
-use App\Models\Product;
-use App\Models\Order;
 
 class DivisiController extends Controller
 {
     /**
-     * Menampilkan halaman untuk membuat pesanan dari SEMUA outlet.
+     * Menampilkan halaman untuk membuat pesanan dengan fungsionalitas pencarian dan paginasi.
      */
+<<<<<<< HEAD
     // public function createOrder()
     // {
     //     // Ambil semua produk yang stoknya ada, dan eager load relasi outlet-nya
@@ -33,6 +34,25 @@ class DivisiController extends Controller
             ->orderBy('outlet_id')
             ->paginate(8);
     
+=======
+    public function createOrder(Request $request)
+    {
+        $search = $request->input('search');
+
+        $query = Product::where('stock', '>', 0)->with('outlet');
+
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'ILIKE', "%{$search}%")
+                  ->orWhere('description', 'ILIKE', "%{$search}%");
+            });
+        }
+
+        // Mengganti get() dengan paginate()
+        // Angka 8 berarti 8 produk per halaman. Anda bisa mengubahnya.
+        $products = $query->orderBy('outlet_id')->orderBy('name')->paginate(8);
+        
+>>>>>>> 98fd97ca091f788734b3650837421689d8bc2a5b
         return view('divisi.order.create', compact('products'));
     }
     
@@ -40,11 +60,9 @@ class DivisiController extends Controller
 
     /**
      * Menyimpan pesanan baru ke database.
-     * Logika ini akan secara otomatis membuat pesanan terpisah untuk setiap outlet.
      */
     public function storeOrder(Request $request)
     {
-        // 1. Filter produk yang kuantitasnya lebih dari 0
         $orderedProducts = array_filter($request->input('products', []), function ($product) {
             return isset($product['quantity']) && $product['quantity'] > 0;
         });
@@ -53,20 +71,14 @@ class DivisiController extends Controller
             return back()->withInput()->withErrors(['error' => 'Anda harus memesan setidaknya satu item.']);
         }
 
-        // 2. Kelompokkan produk berdasarkan outlet_id
         $ordersByOutlet = [];
         foreach ($orderedProducts as $item) {
-            // Ambil data produk dari DB untuk mendapatkan outlet_id yang valid
             $product = Product::find($item['id']);
             if ($product) {
-                // Simpan detail item ke dalam array yang dikelompokkan oleh ID outlet
                 $ordersByOutlet[$product->outlet_id][] = [
                     'product_id' => $product->id,
                     'quantity' => $item['quantity'],
                     'price_per_item' => $product->price,
-                    'product_name' => $product->name, // Simpan nama untuk pesan error
-                    'current_stock' => $product->stock, // Simpan stok untuk validasi
-                    'description' => $product->description, // Simpan deskripsi untuk detail pesanan
                 ];
             }
         }
@@ -74,38 +86,29 @@ class DivisiController extends Controller
         try {
             DB::beginTransaction();
 
-            // 3. Loop untuk setiap outlet dan buat pesanan terpisah
             foreach ($ordersByOutlet as $outletId => $items) {
-                
-                // Buat record Order utama untuk outlet ini
                 $order = Order::create([
                     'user_id' => Auth::id(),
                     'outlet_id' => $outletId,
                     'status' => 'pending',
-                    'total_bill' => 0, // Akan di-update nanti
+                    'total_bill' => 0,
                 ]);
 
                 $totalBill = 0;
 
-                // Loop untuk setiap item dalam pesanan untuk outlet ini
                 foreach ($items as $item) {
-                    // Validasi stok sekali lagi di dalam transaksi
                     $product = Product::where('id', $item['product_id'])->lockForUpdate()->first();
                     if ($item['quantity'] > $product->stock) {
                         throw ValidationException::withMessages([
-                            'products' => "Stok untuk '{$item['product_name']}' di outlet terkait tidak mencukupi. Sisa: {$product->stock}.",
+                            'products' => "Stok untuk produk terkait tidak mencukupi.",
                         ]);
                     }
 
-                    // Buat Order Item
                     $order->items()->create($item);
-
-                    // Akumulasi total tagihan & kurangi stok
                     $totalBill += $item['price_per_item'] * $item['quantity'];
                     $product->decrement('stock', $item['quantity']);
                 }
 
-                // Update total tagihan pada pesanan utama
                 $order->total_bill = $totalBill;
                 $order->save();
             }
