@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Aplikasi POS') - FOOD COURT PAL</title>
+    <title>@yield('title', 'Aplikasi POS') - POS App</title>
     
     {{-- Memanggil Google Fonts & File CSS Utama --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,10 +19,10 @@
     <div id="app">
         <header class="navbar">
             <div class="container">
-                <a href="/" class="navbar-brand">FOOD COURT PAL</a>
+                <a href="/" class="navbar-brand">POS App</a>
                 <nav>
                     @auth
-                        <span class="navbar-user">Halo, {{ Auth::user()->name }} </span>
+                        <span class="navbar-user">Halo, {{ Auth::user()->name }} ({{ ucfirst(Auth::user()->role) }})</span>
                        
                         {{-- Tombol Profil --}}
                         <a href="{{ route('profile.edit') }}" class="icon-nav" style="margin-right: 0.5rem;">

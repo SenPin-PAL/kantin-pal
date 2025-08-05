@@ -14,7 +14,6 @@ class DivisiController extends Controller
     /**
      * Menampilkan halaman untuk membuat pesanan dengan fungsionalitas pencarian dan paginasi.
      */
-<<<<<<< HEAD
     // public function createOrder()
     // {
     //     // Ambil semua produk yang stoknya ada, dan eager load relasi outlet-nya
@@ -27,14 +26,14 @@ class DivisiController extends Controller
     //     return view('divisi.order.create', compact('products'));
     // }
 
-    public function createOrder()
-    {
-        $products = Product::where('stock', '>', 0)
-            ->with('outlet')
-            ->orderBy('outlet_id')
-            ->paginate(8);
-    
-=======
+    // public function createOrder()
+    // {
+    //     $products = Product::where('stock', '>', 0)
+    //         ->with('outlet')
+    //         ->orderBy('outlet_id')
+    //         ->paginate(8);
+    // }
+
     public function createOrder(Request $request)
     {
         $search = $request->input('search');
@@ -52,7 +51,6 @@ class DivisiController extends Controller
         // Angka 8 berarti 8 produk per halaman. Anda bisa mengubahnya.
         $products = $query->orderBy('outlet_id')->orderBy('name')->paginate(8);
         
->>>>>>> 98fd97ca091f788734b3650837421689d8bc2a5b
         return view('divisi.order.create', compact('products'));
     }
     

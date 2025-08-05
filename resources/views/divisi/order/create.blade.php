@@ -28,13 +28,11 @@
                             <p class="outlet-name">{{ $product->outlet->name }}</p>
                             <p class="stock-info">Stok: {{ $product->stock }}</p>
                         </div>
-<<<<<<< HEAD
+
                         <div class="product-card-footer"  data-price="{{ $product->price }}"
                         data-name="{{ $product->name }}" >
                             {{-- Input tersembunyi untuk ID produk --}}
-=======
                         <div class="product-card-footer">
->>>>>>> 98fd97ca091f788734b3650837421689d8bc2a5b
                             <input type="hidden" name="products[{{ $loop->index }}][id]" value="{{ $product->id }}">
                             <div class="quantity-selector">
                                 <button type="button" class="quantity-btn" data-action="decrement">-</button>
