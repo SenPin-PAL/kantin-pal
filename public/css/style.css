@@ -31,6 +31,304 @@ body {
     background-color: var(--light-gray);
     color: var(--text-color);
     line-height: 1.6;
+    /* Menghapus overflow: hidden agar halaman bisa di-scroll */
+}
+
+/* === LAYOUT & NAVBAR === */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar {
+    background-color: var(--white-color);
+    padding: 1rem 0;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.navbar-user {
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+/* === CARD COMPONENT === */
+.card {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--light-gray);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h1, .card-header h2, .card-header h3, .card-header h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-footer {
+    background-color: #F9FAFB;
+    padding: 1.5rem;
+    border-top: 1px solid var(--light-gray);
+    text-align: right;
+}
+
+/* === TABLE STYLING === */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead tr {
+    border-bottom: 2px solid var(--medium-gray);
+}
+
+th {
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--dark-gray);
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--light-gray);
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: var(--light-gray);
+}
+
+td {
+    padding: 1rem 1.5rem;
+    vertical-align: middle;
+}
+
+td form {
+    margin: 0;
+}
+
+/* === BUTTONS === */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+}
+
+.btn-primary { background-color: var(--primary-color); color: var(--white-color); }
+.btn-success { background-color: var(--success-color); color: var(--white-color); }
+.btn-danger { background-color: var(--danger-color); color: var(--white-color); }
+.btn-warning { background-color: var(--warning-color); color: var(--white-color); }
+.btn-secondary { background-color: var(--secondary-color); color: var(--dark-gray); }
+.btn-info { background-color: #0ea5e9; color: white; }
+.btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+.btn-block { width: 100%; }
+.btn-lg { padding: 0.8rem 1.5rem; font-size: 1rem; }
+
+/* === ALERTS === */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid transparent;
+}
+
+.alert-success { background-color: #D1FAE5; border-color: #A7F3D0; color: #065F46; }
+.alert-danger { background-color: #FEE2E2; border-color: #FECACA; color: #991B1B; }
+
+/* === STATUS BADGES === */
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-pending { background-color: #FEF3C7; color: #92400E; }
+.status-approved { background-color: #DBEAFE; color: #1E40AF; }
+.status-preparing { background-color: #FEF08A; color: #A16207; }
+.status-completed { background-color: #D1FAE5; color: #065F46; }
+.status-rejected { background-color: #FEE2E2; color: #991B1B; }
+.status-unpaid { background-color: #FEE2E2; color: #991B1B; }
+.status-partial { background-color: #FEF3C7; color: #92400E; }
+.status-paid { background-color: #D1FAE5; color: #065F46; }
+
+
+/* === FORMS === */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* === PRODUCT CARD GRID STYLING === */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    background-color: var(--white-color);
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.product-card-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.product-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-card-body {
+    padding: 1.25rem;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.product-card-body h3, .product-card-body h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.product-card-body .outlet-name {
+    font-size: 0.85rem;
+    color: #6B7280;
+    margin-bottom: 1rem;
+}
+
+.product-card-body .stock-info {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--success-color);
+}
+
+.product-card-footer {
+    padding: 1.25rem;
+    background-color: #F9FAFB;
+    border-top: 1px solid var(--light-gray);
+}
+
+/* File: public/css/style.css (Final Version)
+  Pastikan Anda menempatkan file ini di lokasi yang benar.
+*/
+
+/* === GLOBAL & FONT SETUP === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #4F46E5; /* Indigo */
+    --success-color: #10B981; /* Emerald */
+    --danger-color: #EF4444; /* Red */
+    --warning-color: #F59E0B; /* Amber */
+    --secondary-color: #e2e8f0; /* Slate 200 */
+    --light-gray: #F3F4F6;
+    --medium-gray: #D1D5DB;
+    --dark-gray: #374151;
+    --text-color: #1F2937;
+    --white-color: #FFFFFF;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
 /* === LAYOUT & NAVBAR === */
@@ -697,3 +995,111 @@ hr.my-4 { border: 0; border-top: 1px solid var(--light-gray); }
     width: 12px !important;  /* Ukuran panah lebih kecil */
     height: 12px !important; /* Ukuran panah lebih kecil */
 }
+/*
+==================================================================
+  ORDER PAGE SPECIFIC STYLES (PAGE SCROLL & STICKY CART)
+==================================================================
+*/
+
+/* Kontainer utama untuk layout 2 kolom */
+.order-container {
+    display: flex;
+    align-items: flex-start; /* Penting untuk sticky positioning */
+    gap: 1.5rem;
+}
+
+/* Panel kiri (menu) - 70% */
+.product-list-panel {
+    flex: 7; /* 70% width */
+}
+
+/* Panel kanan (pesanan) - 30% */
+.order-summary-panel {
+    flex: 3; /* 30% width */
+    position: sticky;
+    top: 2rem; /* Jarak dari atas viewport saat 'terkunci' */
+}
+
+/* Penyesuaian untuk panel ringkasan pesanan */
+.order-summary-panel .card-body {
+    max-height: 60vh; /* Batasi tinggi body keranjang agar bisa di-scroll jika item sangat banyak */
+    overflow-y: auto;
+}
+
+/* Style spesifik untuk item di keranjang */
+#cart-items-list {
+    list-style: none;
+    padding: 0;
+}
+#cart-items-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+#cart-items-list li:last-child {
+    border-bottom: none;
+}
+.item-details small {
+    color: #6c757d;
+}
+
+/* Tombol +/- dan input kuantitas di dalam keranjang */
+.quantity-selector-cart {
+  display: flex;
+  align-items: center;
+}
+.quantity-input-cart {
+  width: 50px;
+  text-align: center;
+  border: 1px solid var(--medium-gray);
+  border-radius: 4px;
+  margin: 0 5px;
+  font-size: 0.9rem;
+}
+.quantity-selector-cart .btn {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    background-color: var(--secondary-color);
+    color: var(--dark-gray);
+}
+
+/*
+==================================================================
+  END OF ORDER PAGE SPECIFIC STYLES
+==================================================================
+*/
+
+
+/* === UTILITIES & OTHER === */
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: #6B7280;
+    font-size: 0.9rem;
+}
+
+.header-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-actions .btn {
+    margin-left: 0.5rem;
+}
+
+.mt-4 { margin-top: 1.5rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.d-flex { display: flex; }
+.d-inline { display: inline-block; }
+.ml-2 { margin-left: 0.5rem; }
+.m-4 { margin: 1.5rem; }
+.mx-4 { margin-left: 1.5rem; margin-right: 1.5rem; }
+.text-center { text-align: center; }
+.text-muted { color: #6c757d; }
+.text-success { color: #059669; }
+.text-danger { color: #DC2626; }
+.my-4 { margin-top: 1.5rem; margin-bottom: 1.5rem; }
+hr.my-4 { border: 0; border-top: 1px solid var(--light-gray); }

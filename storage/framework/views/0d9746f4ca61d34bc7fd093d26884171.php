@@ -3,7 +3,7 @@
 <?php $__env->startSection('content'); ?>
 <div class="card">
     <div class="card-header">
-        <h1>Riwayat Pesanan</h1>
+        <h1>Riwayat Pesanan Saya</h1>
         <a href="<?php echo e(route('divisi.createOrder')); ?>" class="btn btn-primary">Buat Pesanan Baru</a>
     </div>
     <div class="card-body">
@@ -49,7 +49,7 @@
         <td><?php echo e($order->created_at->format('d M Y')); ?></td>
     </tr>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-    <tr><td colspan="5" class="text-center" style="padding: 2rem;">Belum pernah membuat pesanan.</td></tr>
+    <tr><td colspan="5" class="text-center" style="padding: 2rem;">Anda belum pernah membuat pesanan.</td></tr>
     <?php endif; ?>
 </tbody>
             </table>
